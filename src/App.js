@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TodoHeader from './TodoHeader'
+import TodoMain from './TodoMain';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      todos: []
+    }
+  }
+
+  // 添加todo事项的方法
+  addTodo(item) {
+    this.state.todos.push(item);
+    this.setState({todos: this.state.todos});
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="todo-wrapper">
+        <TodoHeader addTodo={this.addTodo.bind(this)}/>
+        <TodoMain todos={this.state.todos}/>
       </div>
     );
   }
